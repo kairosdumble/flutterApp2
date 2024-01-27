@@ -1,53 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:stateful/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  //restore Wiget Data and UI.
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        textTheme: const TextTheme(
-          titleLarge: TextStyle(color: Colors.red),
+        colorScheme: ColorScheme.fromSwatch(
+          backgroundColor: const Color(0xFFE7626C),
         ),
-      ),
-      home: const Scaffold(
-        backgroundColor: Color(0xFFF4EDDB),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MyLargeTitle(),
-            ],
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(
+            color: Color(0xFF232B55),
           ),
         ),
+        cardColor: const Color(0xFFF4EDDB),
       ),
-    );
-  }
-}
-
-class MyLargeTitle extends StatelessWidget {
-  const MyLargeTitle({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text(
-      'My Large Title',
-      style: TextStyle(
-        fontSize: 30,
-      ),
+      home: const HomeScreen(),
     );
   }
 }
