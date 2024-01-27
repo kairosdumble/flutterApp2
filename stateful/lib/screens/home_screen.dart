@@ -46,8 +46,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String format(int seconds) {
     var duration = Duration(seconds: seconds);
-
     return duration.toString().split(".").first.substring(2, 7);
+  }
+
+  void restartPress() {
+    timer.cancel();
+    setState(() {
+      isRunning = false;
+      totalSeconds = twentyFiveMinutes;
+    });
   }
 
   @override
@@ -56,6 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Column(
         children: [
+          const SizedBox(
+            height: 80,
+          ),
           Flexible(
             flex: 1,
             child: Container(
@@ -71,8 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Flexible(
             flex: 3,
-            child: Center(
-              child: IconButton(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              IconButton(
                 iconSize: 150,
                 color: Theme.of(context).cardColor,
                 onPressed: isRunning ? onPausePressed : onStartPressed,
@@ -80,7 +91,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? Icons.pause_circle_outline
                     : Icons.play_circle_outline),
               ),
-            ),
+              IconButton(
+                iconSize: 150,
+                color: Theme.of(context).cardColor,
+                onPressed: restartPress,
+                icon: const Icon(Icons.replay),
+              )
+            ]),
           ),
           Flexible(
             flex: 1,
